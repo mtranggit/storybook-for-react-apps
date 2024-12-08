@@ -1,6 +1,7 @@
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 import { viewports as breakpoints } from '../src/styles/breakpoints'
+import { globalDecorators } from './decorators'
 
 // Create custom viewports using widths defined in design tokens
 const breakpointViewports = Object.keys(breakpoints).reduce((acc, key) => {
@@ -31,3 +32,22 @@ export const parameters = {
     },
   },
 }
+
+export const globalTypes = {
+  theme: {
+    // The label to show for this toolbar item
+    name: 'Theme',
+    description: 'Global theme for components',
+    defaultValue: 'light',
+    toolbar: {
+      title: 'Theme',
+      icon: 'circlehollow',
+      // Array of plain string values or MenuItem shape (see below)
+      items: ['light', 'dark'],
+      // Specifies if the name of the item to be displayed
+      showName: true,
+    },
+  },
+}
+
+export const decorators = globalDecorators
