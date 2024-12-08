@@ -1,5 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { delay, http, HttpResponse } from 'msw'
 
+// import url used to make request
+import { BASE_URL } from '../../../../api'
+// import stub data
 import { restaurants } from '../../../../stub/restaurants'
 
 // import { RestaurantsSectionComponent as RestaurantsSection } from './RestaurantsSection.container'
@@ -32,3 +36,25 @@ export const Default = Template.bind({})
 // Loading.args = {
 //   isLoading: true,
 // }
+
+// Add MSW addon parameters with mocks
+Default.parameters = {
+  msw: {
+    handlers: [
+      http.get(BASE_URL, () => {
+        return HttpResponse.json(restaurants)
+      }),
+    ],
+  },
+}
+
+export const Loading = Template.bind({})
+Loading.parameters = {
+  msw: {
+    handlers: [
+      http.get(BASE_URL, async () => {
+        await delay('infinite')
+      }),
+    ],
+  },
+}
