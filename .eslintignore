@@ -7,3 +7,5 @@ coverage
 
 public
 src/typings.d.ts
+
+!.storybook
